@@ -262,6 +262,25 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
     }
 }
 
+- (void)changeImage:(UIImage *)image fromKey:(NSString *)oldKey toKey:(NSString *)newKey
+{
+    if (!image || !oldKey || !newKey)
+    {
+        return;
+    }
+    
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    NSError* error;
+    if ([fileManager moveItemAtPath:[self defaultCachePathForKey:oldKey]
+                             toPath:[self defaultCachePathForKey:newKey]
+                              error:&error] != YES) {
+    } else {
+        [self.memCache setObject:image forKey:newKey];
+    }
+}
+
+
 - (void)storeImage:(UIImage *)image forKey:(NSString *)key {
     [self storeImage:image recalculateFromImage:YES imageData:nil forKey:key toDisk:YES];
 }

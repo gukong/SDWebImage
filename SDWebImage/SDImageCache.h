@@ -135,6 +135,16 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
 - (void)storeImage:(UIImage *)image recalculateFromImage:(BOOL)recalculate imageData:(NSData *)imageData forKey:(NSString *)key toDisk:(BOOL)toDisk;
 
 /**
+ * Change the key and filename of a cached image, added by robyzhou
+ *
+ * @param image The image to change key and filename
+ * @param oldKey The old key of the image
+ * @param newKey The new key of the image
+ */
+- (void)changeImage:(UIImage *)image fromKey:(NSString *)oldKey toKey:(NSString *)newKey;
+
+
+/**
  * Query the disk cache asynchronously.
  *
  * @param key The unique key used to store the wanted image
